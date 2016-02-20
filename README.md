@@ -6,7 +6,6 @@
 
 - [Install](#install)
 - [Usage](#usage)
-- [API](#api)
 - [Related projects](#related-projects)
 - [Generate docs](#generate-docs)
 - [Running tests](#running-tests)
@@ -27,10 +26,17 @@ $ npm i base-pkg --save
 ## Usage
 
 ```js
-var basePkg = require('base-pkg');
+var pkg = require('base-pkg');
+var Base = require('base');
+var base = new Base();
+
+base.use(pkg());
+
+console.log(base.pkg.data);
+//=> package.json object
 ```
 
-## API
+Exposes all of the methods from [data-store](https://github.com/jonschlinkert/data-store), visit that project for API documentation and to see the full range of available features and options.
 
 ## Related projects
 
