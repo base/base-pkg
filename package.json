@@ -1,7 +1,7 @@
 {
   "name": "base-pkg",
   "description": "Base plugin for adding a `pkg` object with get/set methods for getting data from package.json or setting data to package.json.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/jonschlinkert/base-pkg",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/base-pkg",
@@ -54,7 +54,8 @@
       ]
     },
     "reflinks": [
-      "verb"
+      "verb",
+      "data-store"
     ],
     "lint": {
       "reflinks": true
