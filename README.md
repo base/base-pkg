@@ -1,4 +1,4 @@
-# base-pkg [![NPM version](https://img.shields.io/npm/v/base-pkg.svg)](https://www.npmjs.com/package/base-pkg) [![Build Status](https://img.shields.io/travis/jonschlinkert/base-pkg.svg)](https://travis-ci.org/jonschlinkert/base-pkg)
+# base-pkg [![NPM version](https://img.shields.io/npm/v/base-pkg.svg)](https://www.npmjs.com/package/base-pkg) [![Build Status](https://img.shields.io/travis/node-base/base-pkg.svg)](https://travis-ci.org/node-base/base-pkg)
 
 > Base plugin for adding a `pkg` object with get/set methods for getting data from package.json or setting data to package.json.
 
@@ -42,7 +42,7 @@ Exposes all of the methods from [data-store](https://github.com/jonschlinkert/da
 
 * [base](https://www.npmjs.com/package/base): base is the foundation for creating modular, unit testable and highly pluggable node.js applications, starting… [more](https://www.npmjs.com/package/base) | [homepage](https://github.com/node-base/base)
 * [base-options](https://www.npmjs.com/package/base-options): Adds a few options methods to base-methods, like `option`, `enable` and `disable`. See the readme… [more](https://www.npmjs.com/package/base-options) | [homepage](https://github.com/jonschlinkert/base-options)
-* [base-pipeline](https://www.npmjs.com/package/base-pipeline): base-methods plugin that adds pipeline and plugin methods for dynamically composing streaming plugin pipelines. | [homepage](https://github.com/jonschlinkert/base-pipeline)
+* [base-pipeline](https://www.npmjs.com/package/base-pipeline): base-methods plugin that adds pipeline and plugin methods for dynamically composing streaming plugin pipelines. | [homepage](https://github.com/node-base/base-pipeline)
 * [base-plugins](https://www.npmjs.com/package/base-plugins): Upgrade's plugin support in base applications to allow plugins to be called any time after… [more](https://www.npmjs.com/package/base-plugins) | [homepage](https://github.com/jonschlinkert/base-plugins)
 * [base-tasks](https://www.npmjs.com/package/base-tasks): base-methods plugin that provides a very thin wrapper around [https://github.com/jonschlinkert/composer](https://github.com/jonschlinkert/composer) for adding task methods to… [more](https://www.npmjs.com/package/base-tasks) | [homepage](https://github.com/jonschlinkert/base-tasks)
 
@@ -82,7 +82,7 @@ $ npm install -d && npm test
 ## License
 
 Copyright © 2016 [Jon Schlinkert](https://github.com/jonschlinkert)
-Released under the [MIT license](https://github.com/jonschlinkert/base-pkg/blob/master/LICENSE).
+Released under the [MIT license](https://github.com/node-base/base-pkg/blob/master/LICENSE).
 
 ***
 

@@ -2,11 +2,11 @@
   "name": "base-pkg",
   "description": "Base plugin for adding a `pkg` object with get/set methods for getting data from package.json or setting data to package.json.",
   "version": "0.1.2",
-  "homepage": "https://github.com/jonschlinkert/base-pkg",
+  "homepage": "https://github.com/node-base/base-pkg",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
-  "repository": "jonschlinkert/base-pkg",
+  "repository": "node-base/base-pkg",
   "bugs": {
-    "url": "https://github.com/jonschlinkert/base-pkg/issues"
+    "url": "https://github.com/node-base/base-pkg/issues"
   },
   "license": "MIT",
   "files": [
