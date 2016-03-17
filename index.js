@@ -12,9 +12,7 @@ var namify = require('namify');
 
 module.exports = function(fn) {
   return function plugin(app) {
-    fn = fn || app.validatePlugin;
-    if (typeof fn === 'function' && !fn(this)) return;
-    if (this.isRegistered('base-pkg')) return;
+    if (!isValidInstance(app, fn)) return;
     var self = this;
 
     this.define('pkg', {
@@ -46,4 +44,18 @@ function toAlias(app, name) {
     return app.toAlias(name);
   }
   return name.slice(name.lastIndexOf('-') + 1);
+}
+
+function isValidInstance(app, fn) {
+  fn = fn || app.options.validatePlugin;
+  if (typeof fn === 'function' && !fn(app)) {
+    return false;
+  }
+  if (app.isRegistered('base-pkg')) {
+    return false;
+  }
+  if (app.isCollection || app.isView) {
+    return false;
+  }
+  return true;
 }
