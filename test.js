@@ -52,6 +52,25 @@ describe('base-cwd', function() {
     });
   });
 
+  describe('validation', function() {
+    it('should validate with the given function', function() {
+      app = new Base();
+      app.use(pkg(function(app) {
+        return app.isFoo;
+      }));
+      assert(!app.pkg);
+      assert.equal(typeof app.pkg, 'undefined');
+
+      app.isFoo = true;
+      app.use(pkg(function(app) {
+        return app.isFoo;
+      }));
+
+      assert(app.pkg);
+      assert.equal(typeof app.pkg, 'object');
+    });
+  });
+
   describe('project', function() {
     it('should set a `project` property on app when pkg is first invoked', function() {
       app.pkg.get('name');
