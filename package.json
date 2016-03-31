@@ -1,6 +1,6 @@
 {
   "name": "base-pkg",
-  "description": "Base plugin for adding a `pkg` object with get/set methods for getting data from package.json or setting data to package.json.",
+  "description": "Plugin for adding a `pkg` method that exposes pkg-store to your base application.",
   "version": "0.1.3",
   "homepage": "https://github.com/node-base/base-pkg",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
@@ -20,14 +20,14 @@
     "test": "mocha"
   },
   "dependencies": {
-    "namify": "^0.1.3",
-    "pkg-store": "^0.1.1"
+    "extend-shallow": "^2.0.1",
+    "pkg-store": "^0.2.0"
   },
   "devDependencies": {
-    "base": "^0.6.4",
-    "base-cwd": "^0.1.1",
-    "gulp-format-md": "^0.1.5",
-    "mocha": "*"
+    "base": "^0.8.1",
+    "base-cwd": "^0.1.6",
+    "gulp-format-md": "^0.1.7",
+    "mocha": "^2.4.5"
   },
   "keywords": [
     "base",
@@ -36,7 +36,7 @@
   ],
   "verb": {
     "run": true,
-    "toc": true,
+    "toc": false,
     "layout": "default",
     "tasks": [
       "readme"
@@ -48,14 +48,14 @@
       "list": [
         "base",
         "base-options",
-        "base-pipeline",
-        "base-plugins",
-        "base-tasks"
+        "cache-base",
+        "pkg-store"
       ]
     },
     "reflinks": [
       "verb",
-      "data-store"
+      "data-store",
+      "pkg-store"
     ],
     "lint": {
       "reflinks": true

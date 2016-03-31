@@ -7,55 +7,42 @@
 
 'use strict';
 
+var extend = require('extend-shallow');
 var pkgStore = require('pkg-store');
-var namify = require('namify');
 
-module.exports = function(fn) {
+module.exports = function(config, fn) {
+  if (typeof config === 'function') {
+    fn = config;
+    config = {};
+  }
+
   return function plugin(app) {
-    if (!isValidInstance(app, fn)) return;
-    var self = this;
+    fn = fn || app.options.validatePlugin;
+    if (typeof fn === 'function' && !fn(app)) {
+      return;
+    }
+    if (app.isCollection || app.isView) {
+      return;
+    }
+    if (app.isRegistered('base-pkg')) {
+      return;
+    }
 
+    var pkg;
     this.define('pkg', {
       configurable: true,
       enumerable: true,
       set: function(val) {
-        self.define('pkg', val);
+        pkg = val;
       },
-      get: function fn() {
-        if (fn.pkg) return fn.pkg;
-        fn.pkg = pkgStore(this.cwd || process.cwd());
-
-        var name = this.pkg.get('name') || this.project;
-        this.project = name;
-
-        this.set('cache.data.name', name);
-        this.set('cache.data.varname', namify(name));
-        this.set('cache.data.alias', toAlias(self, name));
-        return fn.pkg;
+      get: function() {
+        if (pkg) return pkg;
+        var cwd = app.cwd || process.cwd();
+        var opts = extend({cwd: cwd}, config, app.options);
+        return (pkg = pkgStore(opts));
       }
     });
 
     return plugin;
   };
 };
-
-function toAlias(app, name) {
-  if (typeof app.toAlias === 'function') {
-    return app.toAlias(name);
-  }
-  return name.slice(name.lastIndexOf('-') + 1);
-}
-
-function isValidInstance(app, fn) {
-  fn = fn || app.options.validatePlugin;
-  if (typeof fn === 'function' && !fn(app)) {
-    return false;
-  }
-  if (app.isRegistered('base-pkg')) {
-    return false;
-  }
-  if (app.isCollection || app.isView) {
-    return false;
-  }
-  return true;
-}

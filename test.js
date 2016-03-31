@@ -70,11 +70,4 @@ describe('base-cwd', function() {
       assert.equal(typeof app.pkg, 'object');
     });
   });
-
-  describe('project', function() {
-    it('should set a `project` property on app when pkg is first invoked', function() {
-      app.pkg.get('name');
-      assert.equal(app.project, 'base-pkg');
-    });
-  });
 });
