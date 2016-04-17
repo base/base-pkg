@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "extend-shallow": "^2.0.1",
+    "log-utils": "^0.1.0",
     "pkg-store": "^0.2.0"
   },
   "devDependencies": {

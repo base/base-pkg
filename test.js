@@ -29,6 +29,10 @@ describe('base-cwd', function() {
       assert.equal(typeof app.pkg.set, 'function');
     });
 
+    it('should add an `app.pkg.logValue` method', function() {
+      assert.equal(typeof app.pkg.set, 'function');
+    });
+
     it('should add an `app.pkg.get` method', function() {
       assert.equal(typeof app.pkg.get, 'function');
     });
@@ -43,6 +47,12 @@ describe('base-cwd', function() {
 
     it('should add an `app.pkg.union` method', function() {
       assert.equal(typeof app.pkg.union, 'function');
+    });
+  });
+
+  describe('logValue', function() {
+    it('should log a value', function() {
+      assert.equal(app.pkg.logValue('udpated:', {reflinks: ['foo', 'bar']}));
     });
   });
 
