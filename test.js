@@ -25,11 +25,15 @@ describe('base-cwd', function() {
       assert.equal(typeof app.pkg, 'object');
     });
 
-    it('should add an `app.pkg.set` method', function() {
-      assert.equal(typeof app.pkg.set, 'function');
+    it('should add an `app.pkg.log*` method', function() {
+      assert.equal(typeof app.pkg.logValue, 'function');
+      assert.equal(typeof app.pkg.logError, 'function');
+      assert.equal(typeof app.pkg.logInfo, 'function');
+      assert.equal(typeof app.pkg.logSuccess, 'function');
+      assert.equal(typeof app.pkg.logWarning, 'function');
     });
 
-    it('should add an `app.pkg.logValue` method', function() {
+    it('should add an `app.pkg.set` method', function() {
       assert.equal(typeof app.pkg.set, 'function');
     });
 
@@ -52,7 +56,19 @@ describe('base-cwd', function() {
 
   describe('logValue', function() {
     it('should log a value', function() {
-      assert.equal(app.pkg.logValue('udpated:', {reflinks: ['foo', 'bar']}));
+      assert.equal(app.pkg.logValue('current value is:', {reflinks: ['foo', 'bar']}));
+    });
+    it('should log an info message', function() {
+      assert.equal(app.pkg.logInfo('udpated value:', {reflinks: ['foo', 'bar']}));
+    });
+    it('should log an warning message', function() {
+      assert.equal(app.pkg.logWarning('deleted value:', {reflinks: ['foo', 'bar']}));
+    });
+    it('should log a success message', function() {
+      assert.equal(app.pkg.logSuccess('added value:', {reflinks: ['foo', 'bar']}));
+    });
+    it('should log an error message', function() {
+      assert.equal(app.pkg.logError('missing value:', {reflinks: ['foo', 'bar']}));
     });
   });
 

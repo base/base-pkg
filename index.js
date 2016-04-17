@@ -57,7 +57,22 @@ module.exports = function(config, fn) {
 function decorate(app, pkg) {
   if (pkg.logValue) return;
   pkg.logValue = function(msg, val) {
+    console.log(log.timestamp, msg, util.inspect(val, null, 10));
+  };
+  pkg.logInfo = function(msg, val) {
     val = log.colors.cyan(util.inspect(val, null, 10));
+    console.log(log.timestamp, msg, val);
+  };
+  pkg.logWarning = function(msg, val) {
+    val = log.colors.yellow(util.inspect(val, null, 10));
+    console.log(log.timestamp, msg, val);
+  };
+  pkg.logError = function(msg, val) {
+    val = log.colors.red(util.inspect(val, null, 10));
+    console.log(log.timestamp, msg, val);
+  };
+  pkg.logSuccess = function(msg, val) {
+    val = log.colors.green(util.inspect(val, null, 10));
     console.log(log.timestamp, msg, val);
   };
 }
