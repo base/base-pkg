@@ -1,7 +1,7 @@
 {
   "name": "base-pkg",
   "description": "Plugin for adding a `pkg` method that exposes pkg-store to your base application.",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "homepage": "https://github.com/node-base/base-pkg",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "node-base/base-pkg",
@@ -20,15 +20,18 @@
     "test": "mocha"
   },
   "dependencies": {
+    "define-property": "^0.2.5",
     "extend-shallow": "^2.0.1",
-    "log-utils": "^0.1.0",
-    "pkg-store": "^0.2.0"
+    "is-registered": "^0.1.4",
+    "is-valid-instance": "^0.1.0",
+    "log-utils": "^0.1.4",
+    "pkg-store": "^0.2.2"
   },
   "devDependencies": {
     "base": "^0.8.1",
-    "base-cwd": "^0.1.6",
-    "gulp-format-md": "^0.1.7",
-    "mocha": "^2.4.5"
+    "base-cwd": "^0.2.0",
+    "gulp-format-md": "^0.1.9",
+    "mocha": "^2.5.2"
   },
   "keywords": [
     "base",

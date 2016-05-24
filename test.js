@@ -8,6 +8,9 @@ var Base = require('base');
 var app;
 
 var pkg = require('./');
+Base.use(function() {
+  this.isApp = true;
+});
 
 describe('base-cwd', function() {
   beforeEach(function() {
@@ -75,25 +78,6 @@ describe('base-cwd', function() {
   describe('get', function() {
     it('should get the name from package.json', function() {
       assert.equal(app.pkg.get('name'), 'base-pkg');
-    });
-  });
-
-  describe('validation', function() {
-    it('should validate with the given function', function() {
-      app = new Base();
-      app.use(pkg(function(app) {
-        return app.isFoo;
-      }));
-      assert(!app.pkg);
-      assert.equal(typeof app.pkg, 'undefined');
-
-      app.isFoo = true;
-      app.use(pkg(function(app) {
-        return app.isFoo;
-      }));
-
-      assert(app.pkg);
-      assert.equal(typeof app.pkg, 'object');
     });
   });
 });

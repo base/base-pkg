@@ -8,6 +8,9 @@
 'use strict';
 
 var util = require('util');
+var define = require('define-property');
+var isValidInstance = require('is-valid-instance');
+var isRegistered = require('is-registered');
 var extend = require('extend-shallow');
 var pkgStore = require('pkg-store');
 var log = require('log-utils');
@@ -19,16 +22,7 @@ module.exports = function(config, fn) {
   }
 
   return function plugin(app) {
-    fn = fn || app.options.validatePlugin;
-    if (typeof fn === 'function' && !fn(app)) {
-      return;
-    }
-    if (app.isCollection || app.isView) {
-      return;
-    }
-    if (app.isRegistered('base-pkg')) {
-      return;
-    }
+    if (!isValid(app)) return;
 
     var pkg;
     this.define('pkg', {
@@ -54,25 +48,39 @@ module.exports = function(config, fn) {
   };
 };
 
+/**
+ * Utils
+ */
+
+function isValid(app) {
+  if (!isValidInstance(app)) {
+    return false;
+  }
+  if (isRegistered(app, 'base-pkg')) {
+    return false;
+  }
+  return true;
+}
+
 function decorate(app, pkg) {
   if (pkg.logValue) return;
-  pkg.logValue = function(msg, val) {
+  define(pkg, 'logValue', function(msg, val) {
     console.log(log.timestamp, msg, util.inspect(val, null, 10));
-  };
-  pkg.logInfo = function(msg, val) {
+  });
+  define(pkg, 'logInfo', function(msg, val) {
     val = log.colors.cyan(util.inspect(val, null, 10));
     console.log(log.timestamp, msg, val);
-  };
-  pkg.logWarning = function(msg, val) {
+  });
+  define(pkg, 'logWarning', function(msg, val) {
     val = log.colors.yellow(util.inspect(val, null, 10));
     console.log(log.timestamp, msg, val);
-  };
-  pkg.logError = function(msg, val) {
+  });
+  define(pkg, 'logError', function(msg, val) {
     val = log.colors.red(util.inspect(val, null, 10));
     console.log(log.timestamp, msg, val);
-  };
-  pkg.logSuccess = function(msg, val) {
+  });
+  define(pkg, 'logSuccess', function(msg, val) {
     val = log.colors.green(util.inspect(val, null, 10));
     console.log(log.timestamp, msg, val);
-  };
+  });
 }
