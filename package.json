@@ -10,7 +10,8 @@
   },
   "license": "MIT",
   "files": [
-    "index.js"
+    "index.js",
+    "utils.js"
   ],
   "main": "index.js",
   "engines": {
@@ -20,23 +21,27 @@
     "test": "mocha"
   },
   "dependencies": {
+    "cache-base": "^0.8.4",
     "define-property": "^0.2.5",
+    "expand-pkg": "^0.1.4",
     "extend-shallow": "^2.0.1",
-    "is-registered": "^0.1.4",
-    "is-valid-instance": "^0.1.0",
+    "is-valid-app": "^0.1.1",
+    "lazy-cache": "^2.0.1",
     "log-utils": "^0.1.4",
     "pkg-store": "^0.2.2"
   },
   "devDependencies": {
-    "base": "^0.8.1",
-    "base-cwd": "^0.2.0",
+    "base": "^0.11.0",
+    "base-cwd": "^0.2.1",
     "gulp-format-md": "^0.1.9",
-    "mocha": "^2.5.2"
+    "mocha": "^2.5.3"
   },
   "keywords": [
+    "app",
     "base",
     "baseplugin",
-    "app"
+    "pkg",
+    "plugin"
   ],
   "verb": {
     "run": true,
@@ -57,9 +62,12 @@
       ]
     },
     "reflinks": [
-      "verb",
       "data-store",
-      "pkg-store"
+      "pkg-store",
+      "verb",
+      "cache-base",
+      "expand-pkg",
+      "verb-readme-generator"
     ],
     "lint": {
       "reflinks": true
