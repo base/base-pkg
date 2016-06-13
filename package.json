@@ -1,7 +1,7 @@
 {
   "name": "base-pkg",
   "description": "Plugin for adding a `pkg` method that exposes pkg-store to your base application.",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "homepage": "https://github.com/node-base/base-pkg",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "node-base/base-pkg",
