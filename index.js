@@ -1,14 +1,21 @@
 /*!
- * base-pkg <https://github.com/jonschlinkert/base-pkg>
+ * base-pkg <https://github.com/node-base/base-pkg>
  *
- * Copyright (c) 2016, Jon Schlinkert.
- * Licensed under the MIT License.
+ * Copyright (c) 2016-2017, Jon Schlinkert.
+ * Released under the MIT License.
  */
 
 'use strict';
 
 var util = require('util');
-var utils = require('./utils');
+var debug = require('debug')('base:base-pkg');
+var define = require('define-property');
+var extend = require('extend-shallow');
+var isValid = require('is-valid-app');
+var pkgStore = require('pkg-store');
+var Cache = require('cache-base');
+var Pkg = require('expand-pkg');
+var log = require('log-utils');
 
 module.exports = function(config, fn) {
   if (typeof config === 'function') {
@@ -17,7 +24,8 @@ module.exports = function(config, fn) {
   }
 
   return function plugin(app) {
-    if (!utils.isValid(app, 'base-pkg')) return;
+    if (!isValid(app, 'base-pkg')) return;
+    debug('initializing from <%s>', __filename);
 
     var pkg;
     this.define('pkg', {
@@ -32,8 +40,8 @@ module.exports = function(config, fn) {
           return pkg;
         }
         var cwd = app.cwd || process.cwd();
-        var opts = utils.extend({cwd: cwd}, config, app.options);
-        pkg = utils.pkgStore(opts);
+        var opts = extend({cwd: cwd}, config, app.options);
+        pkg = pkgStore(opts);
         decorate(app, pkg);
         return pkg;
       }
@@ -49,30 +57,30 @@ module.exports = function(config, fn) {
 
 function decorate(app, pkg) {
   if (pkg.logValue) return;
-  utils.define(pkg, 'expand', function() {
-    var config = new utils.Pkg();
-    var data = utils.extend({}, pkg.data);
+  define(pkg, 'expand', function() {
+    var config = new Pkg();
+    var data = extend({}, pkg.data);
     var expanded = config.expand(data);
-    var cache = new utils.Cache(expanded);
+    var cache = new Cache(expanded);
     return cache;
   });
-  utils.define(pkg, 'logValue', function(msg, val) {
-    console.log(utils.log.timestamp, msg, util.inspect(val, null, 10));
+  define(pkg, 'logValue', function(msg, val) {
+    console.log(log.timestamp, msg, util.inspect(val, null, 10));
   });
-  utils.define(pkg, 'logInfo', function(msg, val) {
-    val = utils.log.colors.cyan(util.inspect(val, null, 10));
-    console.log(utils.log.timestamp, msg, val);
+  define(pkg, 'logInfo', function(msg, val) {
+    val = log.colors.cyan(util.inspect(val, null, 10));
+    console.log(log.timestamp, msg, val);
   });
-  utils.define(pkg, 'logWarning', function(msg, val) {
-    val = utils.log.colors.yellow(util.inspect(val, null, 10));
-    console.log(utils.log.timestamp, msg, val);
+  define(pkg, 'logWarning', function(msg, val) {
+    val = log.colors.yellow(util.inspect(val, null, 10));
+    console.log(log.timestamp, msg, val);
   });
-  utils.define(pkg, 'logError', function(msg, val) {
-    val = utils.log.colors.red(util.inspect(val, null, 10));
-    console.log(utils.log.timestamp, msg, val);
+  define(pkg, 'logError', function(msg, val) {
+    val = log.colors.red(util.inspect(val, null, 10));
+    console.log(log.timestamp, msg, val);
   });
-  utils.define(pkg, 'logSuccess', function(msg, val) {
-    val = utils.log.colors.green(util.inspect(val, null, 10));
-    console.log(utils.log.timestamp, msg, val);
+  define(pkg, 'logSuccess', function(msg, val) {
+    val = log.colors.green(util.inspect(val, null, 10));
+    console.log(log.timestamp, msg, val);
   });
 }
