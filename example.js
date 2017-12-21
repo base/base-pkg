@@ -1,13 +1,10 @@
 'use strict';
 
-var pkg = require('./');
-var cwd = require('base-cwd');
-var Base = require('base');
-var app = new Base({isApp: true});
-app.use(cwd());
+const pkg = require('./');
+const Base = require('base');
+const app = new Base();
 app.use(pkg());
 
-var expanded = app.pkg.expand();
-console.log(app.pkg.get('author'))
-console.log(expanded.get('author'))
+console.log(app.pkg.get('author'));
+console.log(app.pkg.expand());
 
